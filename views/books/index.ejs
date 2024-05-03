@@ -1,0 +1,66 @@
+<% include ../layouts/header.ejs %>
+
+
+        <br><br>
+        <a href="/books/create" class="btn btn-primary" type="button">Add a new book</a>
+        <br><br>
+
+        <table class="table table-light">
+
+
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        
+    
+    
+            <tbody>
+                <% for( let book = 0; book < books.length; book++) { %> <% // books comes from booksController ln 13 col 40  %>
+                
+                    <tr>
+                        <td><%= books[book].id %></td>
+    
+                        <td><%= books[book].name %></td>
+
+
+                        <td>
+                            <img class="img-thumbnail" width="100px" src="images/<%= books[book].image %>" alt="">
+                        </td>
+
+
+                        <td>
+
+                            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                
+                                <form class="form-inline" method="get" action="/books/edit/<%= books[book].id%>">
+                                    <button class="btn btn-warning" type="submit">Edit</button>
+                                </form>
+
+                            </div>
+
+                            
+                            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                
+                                <form class="form-inline" method="post" action="/books/delete/<%= books[book].id%>">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+
+                            </div>
+                            
+                        </td>
+                    
+                    </tr>
+    
+                <% } %>
+    
+            </tbody>
+    
+    
+        </table>
+
+        <% include ../layouts/footer.ejs %>
