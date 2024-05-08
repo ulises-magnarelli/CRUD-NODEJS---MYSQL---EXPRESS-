@@ -80,29 +80,22 @@ module.exports = {
         console.log(req.body.name);
         
         
-        if(req.body.name){
-        book.update(connection,req.body,function (err) { });   //update only the name 
-        
-        };
-        
-
-
         if(req.file){ //update the image
             
             if(req.file.filename){
-
+                
                 book.returnDataByID(connection, req.body.id, function (err,records) {
-
+                    
                     var imageName ='public/images/'+(records[0].image);
-        
+                    
                     if(erase.existsSync(imageName)){
                         erase.unlinkSync(imageName);
                     }
                     book.updateArchive(connection, req.body, req.file, function (err) { });
-
+                    
                 });
-
-
+                
+                
                 
             }
             
@@ -110,6 +103,10 @@ module.exports = {
         
         
         
+        if(req.body.name){
+        book.update(connection,req.body,function (err) { });   //update only the name 
+        
+        };
         
         
         res.redirect('/books')
